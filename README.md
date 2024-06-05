@@ -1,1 +1,1 @@
-# constellation-mythology
+# constellation-weather-app

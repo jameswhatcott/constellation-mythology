@@ -1,0 +1,23 @@
+/* ---------- custom styles ---------- */
+.exo-font {
+    font-family: "Exo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+}
+
+body {
+    font-family: "Exo", sans-serif;
+}
+
+.ui-checkboxradio-label {
+    font-family:"Exo";
+    font-weight:700;
+}
+
+.parenthetical {
+    font-weight: 400;
+    font-size:x-small;
+
+}
+

@@ -1,25 +1,20 @@
-$(function() {
-  $( "#locOptions").buttonset();
-});
-
 function getLocation() {
-  if (geoLocEl checked) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const {latitude, longitude} = position.coords;
-      //is the above returning two value or an array? If an array, what's the array's name?
-      });
+  // if geolocation option chosen by user
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else { // no results returned
+      alert("Your brower does not support geolocation. Try a different browser.");
+      return;
     }
-} else {
-  let lat = "";
-  let lng = "";
-  let address = {zipcode};
-  geocoder.geocode ({'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      lat = results[0].geometry.location.lat();
-      lng = results[0].geometry.location.lng();
-      fetch ("https://maps.googleapis.com/maps/api/geocode/json?key=YOUR_API_KEY&components=postal_code:97403")
+  // } else { // zip code option chosen by user
+  }
 
+function showPosition(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    console.log("Latitude = " + lat + "; Longitude = " + lon);
+}
 
-      }
-  });
-};
+getLocation();
+
+  

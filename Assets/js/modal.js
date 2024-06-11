@@ -15,6 +15,4 @@ function showPosition(position) {
     console.log("Latitude = " + lat + "; Longitude = " + lon);
 }
 
-getLocation();
-
-  
+document.addEventListener("onload", getLocation());

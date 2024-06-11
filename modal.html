@@ -15,15 +15,15 @@
         <div id=demo></div>
         <div id = "locOptionsSet">
             <h2>How Should I Find Your Map?</h2>
-        <input name = "geoLocSet" type = "radio" id = "geoLocEl">
-        <label for = "geoLocEl" class="ui-corner-all">Geolocation</label>
-        <input name = "geoLocSet" type = "radio" id = "zipCodeEl">
-        <label for = "zipCodeEl" class="ui-corner-all">Postal Code <span class=parenthetical>(US only)</span></label>
+        <input name = "locatorOpt" type = "radio" id = "geoLocEl">
+        <!-- <label for = "geoLocEl" class="ui-corner-all">Geolocation</label> -->
+        <input name = "locatorOpt" type = "radio" id = "zipLocEl">
+        <!-- <label for = "zipCodeEl" class="ui-corner-all">Postal Code <span class=parenthetical>(US only)</span></label> -->
         </div>
         <button type="submit" id = "submitBtn">Go!</button>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-        <script src="./assets/js/modal.js"></script>
+        <!-- <script src="./assets/js/modal.js"></script> -->
         <script>
             $(function() {
                 $("#locOptionsSet").buttonset();
@@ -36,6 +36,6 @@
 
             })
         </script>
-        <script src="modal.js"></script>
+        <script src="./assets/js/geolocation.js"></script>
     </body>
 </html>

@@ -18,6 +18,9 @@ body {
 .parenthetical {
     font-weight: 400;
     font-size:x-small;
-
 }
 
+#submitBtn {
+    display:block;
+    margin-top:10px;
+}

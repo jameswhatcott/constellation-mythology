@@ -14,7 +14,8 @@
     <body>
         <div id = "locOptionsSet">
             <h2>How Should I Find Your Map?</h2>
-        <label for = "geoLocEl" class = "ui-corner-all" style = "width: 360px; border-radius:5px;">Geolocation</label>
+            <form id="myForm">
+                    <label for = "geoLocEl" class = "ui-corner-all" style = "width: 360px; border-radius:5px;">Geolocation</label>
             <input name = "locatorOpt" type = "radio" id = "geoLocEl">
             <div>
                 <label for = "zipLocEl" class="ui-corner-all" style = "width: 360px; text-align:left; border-radius:5px;">Postal Code <span class=parenthetical>(US only)</span></label>
@@ -23,9 +24,9 @@
             </div>
         </div>
         <button type = "submit" id = "submitBtn">Go!</button>
+        </form>
         <script src = "https://code.jquery.com/jquery-1.12.4.js"></script> 
         <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-        <script src = "./assets/js/geolocation.js"></script>
         <script>
             $(function() {
                 $("#locOptionsSet").buttonset();
@@ -36,5 +37,8 @@
                 locOptionsSet.classList.add("ui-controlgroup-vertical")
             })
         </script>
+        <script src="./Assets/js/geolocation.js"></script>
+        <script src="./Assets/js/script.js"></script>
+
     </body>
 </html>

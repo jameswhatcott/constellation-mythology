@@ -32,13 +32,11 @@ form.addEventListener("submit", (event) => {
     const city = cityInput.value.trim();
     if (city) {
         fetchWeatherData(city);
-        localStorage.setItem("lastCity", city);
     }
 });
 
 function fetchWeatherData(city) {
-    const lat = 
-    const lon = 
+
     const url = `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=cloud_cover&hourly=temperature_2m,precipitation_probability,precipitation,visibility&temperature_unit=fahrenheit&forecast_days=1`;
     
     fetch(url)
@@ -49,6 +47,7 @@ function fetchWeatherData(city) {
                 return response.json();
             })
             .then(data => {
+                console.log(data);
                 displayWeatherData(data);
             })
             .catch(error => {
@@ -56,6 +55,8 @@ function fetchWeatherData(city) {
                 weatherResult.innerHTML = `<p>Error fetching weather data: ${error.message}</p>`;
             });
     }
+
+
 
 
 

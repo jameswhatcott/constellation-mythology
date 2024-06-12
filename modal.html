@@ -1,0 +1,40 @@
+<!doctype html> 
+<html lang="en"> 
+  
+    <head> 
+        <meta charset="utf-8">
+        <link rel = "preconnect" href="https://fonts.googleapis.com">
+        <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href = "https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href = "https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css" rel = "stylesheet">
+        <link rel = "stylesheet" href="./assets/css/modal.css">
+        <title>Constellation Weather</title>
+    </head>
+    
+    <body>
+        <div id = "locOptionsSet">
+            <h2>How Should I Find Your Map?</h2>
+        <label for = "geoLocEl" class = "ui-corner-all" style = "width: 360px; border-radius:5px;">Geolocation</label>
+            <input name = "locatorOpt" type = "radio" id = "geoLocEl">
+            <div>
+                <label for = "zipLocEl" class="ui-corner-all" style = "width: 360px; text-align:left; border-radius:5px;">Postal Code <span class=parenthetical>(US only)</span></label>
+                <input name = "locatorOpt" type = "radio" id = "zipLocEl">
+                <input id = "zipInput" placeholder = "Zip code" style = "position:relative; left:-170px">
+            </div>
+        </div>
+        <button type = "submit" id = "submitBtn">Go!</button>
+        <script src = "https://code.jquery.com/jquery-1.12.4.js"></script> 
+        <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+        <script src = "./assets/js/geolocation.js"></script>
+        <script>
+            $(function() {
+                $("#locOptionsSet").buttonset();
+            });
+        </script>
+        <script>
+            $(function () {
+                locOptionsSet.classList.add("ui-controlgroup-vertical")
+            })
+        </script>
+    </body>
+</html>

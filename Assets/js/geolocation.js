@@ -1,5 +1,9 @@
-let lat = ""; // these need to be global variables to pass out of the .then statements
-let lon = "";
+export {lat, lon};
+ 
+ let lat = ""; // these need to be global variables to pass out of the .then statements
+ let lon = "";
+ 
+
 
 const submitBtn = document.getElementById("submitBtn")
 

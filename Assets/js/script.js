@@ -25,6 +25,12 @@ function fetchWeatherData(lat, lon) {
         });
 }
 
+function displayWeather (data) {
+    const weather = document.getElementById("weatherResult");
+    weather.innerHTML = data.current.cloud_cover
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
     //--------------------- API for weather-----------------------------------------

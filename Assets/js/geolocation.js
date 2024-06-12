@@ -17,7 +17,7 @@ function getLocation() {
     if ("geolocation" in navigator) { // test to see if geolocation is supported by browser
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
-          resolve(position);
+          resolve({lat: position.coords.latitude, lon: position.coords.longitude});
           lat = position.coords.latitude;
           lon = position.coords.longitude;
         });
@@ -39,6 +39,7 @@ function getLocation() {
         .then (function (coordinatesObj) {
           lat = coordinatesObj.results[0].geometry.location.lat;
           lon = coordinatesObj.results[0].geometry.location.lng;
+          return { lat, lon };
         }
       );
     }

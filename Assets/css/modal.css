@@ -1,0 +1,53 @@
+/* ---------- custom styles ---------- */
+.exo-font {
+    font-family: "Exo", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.ui-checkboxradio-label {
+    font-family:"Exo";
+    font-weight:7006;
+}
+
+.ui-dialog-title {
+    font-family: "Exo", sans-serif;
+}
+
+#locOptionQuery {
+    margin-top:0;
+    font-family:"Exo", sans-serif;
+    font-weight:600;
+    font-size:1em;
+}
+
+label {
+    width:265px;
+    border-radius:5px;
+}
+
+#geoLoc label {
+    text-align:left;
+}
+
+#zipLoc {
+    margin-top:5px;
+}
+
+#zipLoc label {
+    text-align:left;
+}
+
+#zipInput {
+    font-family:"Exo", sans-serif;
+    font-size:1em;
+    position:relative;
+    width:90px;
+    left:10px;
+}
+
+#submitBtn {
+    display:block;
+    margin-top:10px;
+}
+

@@ -31,8 +31,18 @@ function fetchWeatherData(lat, lon) {
 }
 
 function displayWeather (data) {
-    const weather = document.getElementById("weatherResult");
-    weather.innerHTML = `<p>${data.current.cloud_cover}<p>`;
+    const temp = document.getElementById("temp");
+    const cloudCover = document.getElementById("cloudCover");
+    const visibility = document.getElementById("visibility");
+
+    temp.innerHTML += data.hourly.temperature_2m[0] + data.hourly_units.temperature_2m;
+    cloudCover.innerHTML += data.current.cloud_cover + data.current_units.cloud_cover;
+
+    if (data.hourly.visibility[0] < 1000) {
+        visibility.innerHTML += ' Foggy ';
+    } else {
+        visibility.innerHTML += ' Clear ';
+    }
 }
 
 

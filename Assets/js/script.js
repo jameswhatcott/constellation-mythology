@@ -5,9 +5,8 @@ let geoLocation = params.get("geolocation");
 let zipCode = params.get("zipcode");
 
 function fetchWeatherData(lat, lon) {
-    
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=31.328358&longitude=-94.653306&current=temperature_2m,cloud_cover&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,visibility&temperature_unit=fahrenheit&timezone=America%2FChicago&forecast_days=1`;
-    
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,visibility&temperature_unit=fahrenheit&timezone=auto&forecast_days=1`;
+
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -21,7 +20,7 @@ function fetchWeatherData(lat, lon) {
         })
         .catch(error => {
             console.error("Error fetching weather data:", error);
-            
+
             // Ensure weatherResult is defined or exists in your HTML
             const weatherResult = document.getElementById("weatherResult");
             if (weatherResult) {
@@ -36,57 +35,53 @@ function displayWeather(data) {
     const todayCloudCover = document.querySelector("#todayWeather .cloudCover");
     const todayVisibility = document.querySelector("#todayWeather .visibility");
 
-   
     function convertISOToNormalTime(isoTime) {
         const date = new Date(isoTime);
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
         return date.toLocaleString('en-US', options);
     }
-    
-    const isoTime = data.current.time;
-    const normalTime = convertISOToNormalTime(isoTime);
 
+    const currentTime = new Date();
+    const normalTime = convertISOToNormalTime(currentTime.toISOString());
     todayTime.innerHTML = normalTime;
-    todayTemp.innerHTML += `${data.current.temperature_2m} ${data.current_units.temperature_2m}`;
-    todayCloudCover.innerHTML += `${data.current.cloud_cover} ${data.current_units.cloud_cover}`;
+    todayTemp.innerHTML += `${data.current_weather.temperature} ${data.hourly_units.temperature_2m}`;
+    todayCloudCover.innerHTML += `${data.current_weather.cloudcover} %`;
 
-    if (data.hourly.visibility[0] < 1000) {
+    if (data.current_weather.visibility < 1000) {
         todayVisibility.innerHTML += ' Foggy ';
     } else {
         todayVisibility.innerHTML += ' Clear ';
     }
 
-    for (let i = 1; i < 7; i++) {
-        const hrTemp = document.querySelector(`#hrWeather\\[${i}\\] .temp`);
-        const hrCloudCover = document.querySelector(`#hrWeather\\[${i}\\] .cloudCover`);
-        const hrVisibility = document.querySelector(`#hrWeather\\[${i}\\] .visibility`);
+    const currentHour = currentTime.getHours();
+    const startIndex = data.hourly.time.findIndex(time => new Date(time).getHours() === currentHour);
 
-        if (hrTemp) {
-            hrTemp.innerHTML += `${data.hourly.temperature_2m[i]} ${data.hourly_units.temperature_2m}`;
+    for (let i = 0; i < 6; i++) {
+        const hourIndex = startIndex + i;
+        const hrTemp = document.querySelector(`#hrWeather\\[${i + 1}\\] .temp`);
+        const hrCloudCover = document.querySelector(`#hrWeather\\[${i + 1}\\] .cloudCover`);
+        const hrVisibility = document.querySelector(`#hrWeather\\[${i + 1}\\] .visibility`);
+
+        if (hrTemp && data.hourly.temperature_2m[hourIndex] !== undefined) {
+            hrTemp.innerHTML = `${data.hourly.temperature_2m[hourIndex]} ${data.hourly_units.temperature_2m}`;
         }
-        if (hrCloudCover) {
-            hrCloudCover.innerHTML += `${data.current.cloud_cover} ${data.current_units.cloud_cover}`;
+        if (hrCloudCover && data.hourly.cloudcover[hourIndex] !== undefined) {
+            hrCloudCover.innerHTML = `${data.hourly.cloudcover[hourIndex]} %`;
         }
 
-        if (hrVisibility) {
-            if (data.hourly.visibility[i] < 1000) {
-                hrVisibility.innerHTML += ' Foggy ';
+        if (hrVisibility && data.hourly.visibility[hourIndex] !== undefined) {
+            if (data.hourly.visibility[hourIndex] < 1000) {
+                hrVisibility.innerHTML = ' Foggy ';
             } else {
-                hrVisibility.innerHTML += ' Clear ';
+                hrVisibility.innerHTML = ' Clear ';
             }
         }
     }
 }
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-        getLocation(geoLocation, zipCode).then(function (data) {
-            console.log(data);
-            fetchWeatherData(data.lat, data.lon);
-
-
-        })
-    
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    getLocation(geoLocation, zipCode).then(function (data) {
+        console.log(data);
+        fetchWeatherData(data.lat, data.lon);
+    });
+});

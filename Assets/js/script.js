@@ -30,20 +30,42 @@ function fetchWeatherData(lat, lon) {
         });
 }
 
-function displayWeather (data) {
-    const temp = document.getElementById("temp");
-    const cloudCover = document.getElementById("cloudCover");
-    const visibility = document.getElementById("visibility");
+function displayWeather(data) {
+    const todayTemp = document.querySelector("#todayWeather .temp");
+    const todayCloudCover = document.querySelector("#todayWeather .cloudCover");
+    const todayVisibility = document.querySelector("#todayWeather .visibility");
 
-    temp.innerHTML += data.hourly.temperature_2m[0] + data.hourly_units.temperature_2m;
-    cloudCover.innerHTML += data.current.cloud_cover + data.current_units.cloud_cover;
+    todayTemp.innerHTML += `${data.hourly.temperature_2m[0]} ${data.hourly_units.temperature_2m}`;
+    todayCloudCover.innerHTML += `${data.current.cloud_cover} ${data.current_units.cloud_cover}`;
 
     if (data.hourly.visibility[0] < 1000) {
-        visibility.innerHTML += ' Foggy ';
+        todayVisibility.innerHTML += ' Foggy ';
     } else {
-        visibility.innerHTML += ' Clear ';
+        todayVisibility.innerHTML += ' Clear ';
+    }
+
+    for (let i = 1; i < 6; i++) {
+        const hrTemp = document.querySelector(`#hrWeather\\[${i}\\] .temp`);
+        const hrCloudCover = document.querySelector(`#hrWeather\\[${i}\\] .cloudCover`);
+        const hrVisibility = document.querySelector(`#hrWeather\\[${i}\\] .visibility`);
+
+        if (hrTemp) {
+            hrTemp.innerHTML += `${data.hourly.temperature_2m[i]} ${data.hourly_units.temperature_2m}`;
+        }
+        if (hrCloudCover) {
+            hrCloudCover.innerHTML += `${data.current.cloud_cover} ${data.current_units.cloud_cover}`;
+        }
+
+        if (data.hourly.visibility[i] < 1000) {
+            if (hrVisibility) {
+                hrVisibility.innerHTML += ' Foggy ';
+            } else {
+                hrVisibility.innerHTML += ' Clear ';
+            }
+        }
     }
 }
+
 
 
 document.addEventListener('DOMContentLoaded', function() {

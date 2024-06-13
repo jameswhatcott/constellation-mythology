@@ -37,7 +37,7 @@ function displayWeather(data) {
 
     function convertISOToNormalTime(isoTime) {
         const date = new Date(isoTime);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
         return date.toLocaleString('en-US', options);
     }
 

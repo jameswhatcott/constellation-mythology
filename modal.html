@@ -14,12 +14,8 @@
         <script>
             $(function() {
                 $("#locOptionsSet").dialog({
-                    autoOpen: false,
+                    autoOpen: true,
                     modal: true
-                });
-// There won't be a button; this should open after the splash page shows for a specified amount of time
-                $("#opener").click(function() {
-                    $("#locOptionsSet").dialog("open");
                 });
             });
         </script>

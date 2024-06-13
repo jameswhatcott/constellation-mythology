@@ -3,30 +3,46 @@
   
     <head> 
         <meta charset="utf-8">
+        <title>Constellation Weather</title>
         <link rel = "preconnect" href="https://fonts.googleapis.com">
         <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href = "https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <link href = "https://code.jquery.com/ui/1.12.1/themes/start/jquery-ui.css" rel = "stylesheet">
         <link rel = "stylesheet" href="./assets/css/modal.css">
-        <title>Constellation Weather</title>
+        <script src = "https://code.jquery.com/jquery-1.12.4.js"></script> 
+        <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+        <script>
+            $(function() {
+                $("#locOptionsSet").dialog({
+                    autoOpen: false,
+                    modal: true
+                });
+// There won't be a button; this should open after the splash page shows for a specified amount of time
+                $("#opener").click(function() {
+                    $("#locOptionsSet").dialog("open");
+                });
+            });
+        </script>
     </head>
     
     <body>
-        <div id = "locOptionsSet">
-            <h2>How Should I Find Your Map?</h2>
-            <form id="myForm">
-                    <label for = "geoLocEl" class = "ui-corner-all" style = "width: 360px; border-radius:5px;">Geolocation</label>
-            <input name = "locatorOpt" type = "radio" id = "geoLocEl">
-            <div>
-                <label for = "zipLocEl" class="ui-corner-all" style = "width: 360px; text-align:left; border-radius:5px;">Postal Code <span class=parenthetical>(US only)</span></label>
-                <input name = "locatorOpt" type = "radio" id = "zipLocEl">
-                <input id = "zipInput" placeholder = "Zip code" style = "position:relative; left:-170px">
+        <div id = "locOptionsSet" title="Location Method">
+            <h2 id="locOptionQuery">How Should I Find Your Map?</h2>
+            <form>
+            <div id="geoLoc">
+                <label for = "geoLocEl">Geolocation
+                    <input name = "locatorOpt" type = "radio" id = "geoLocEl">
+                </label>
             </div>
+            <div id="zipLoc">
+                <label for = "zipLocEl">Postal Code
+                    <input name = "locatorOpt" type = "radio" id = "zipLocEl">
+                    <input id = "zipInput" placeholder = "Zip code">
+                </label>
+            </div>
+            <button type = "submit" id = "submitBtn" style = "width:70px; border-radius:5px; text-align:center;">Go!</button>
+            </form>
         </div>
-        <button type = "submit" id = "submitBtn">Go!</button>
-        </form>
-        <script src = "https://code.jquery.com/jquery-1.12.4.js"></script> 
-        <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
         <script>
             $(function() {
                 $("#locOptionsSet").buttonset();
@@ -37,8 +53,12 @@
                 locOptionsSet.classList.add("ui-controlgroup-vertical")
             })
         </script>
+
+        
+      <button id="opener">Open Dialog</button>
         
         <script src="./Assets/js/modal.js"></script>
+
 
     </body>
 </html>

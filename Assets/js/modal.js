@@ -16,3 +16,24 @@ function showPosition(position) {
 }
 
 document.addEventListener("onload", getLocation());
+
+//-----------------------------------------------------------------------------
+
+const geoLocEl = document.getElementById("geoLocEl");
+const zipLocEl = document.getElementById("zipLocEl");
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+  const form = document.getElementById("myForm");
+  if (form) {
+  form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const geo = geoLocEl.checked; 
+      const searchZip = document.querySelector("#zipInput").value;
+      window.location.href = `results.html?geolocation=${geo}&zipcode=${searchZip}`
+      
+
+    
+  
+  })}})

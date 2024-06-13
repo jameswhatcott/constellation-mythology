@@ -32,7 +32,8 @@ function fetchWeatherData(lat, lon) {
 
 function displayWeather (data) {
     const weather = document.getElementById("weatherResult");
-    weather.innerHTML = `<p>${data.current.cloud_cover}<p>`;
+    const weatherHead = document.getElementById("")
+    weather.innerHTML 
 }
 
 

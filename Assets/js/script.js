@@ -1,4 +1,8 @@
-//
+//--------------------API for Weather----------------------------
+
+let params = new URLSearchParams(document.location.search);
+let geoLocation = params.get("geolocation");
+let zipCode = params.get("zipcode");
 
 function fetchWeatherData(lat, lon) {
     
@@ -13,6 +17,7 @@ function fetchWeatherData(lat, lon) {
         })
         .then(data => {
             console.log(data);  // Log data to console
+            displayWeather(data);
         })
         .catch(error => {
             console.error("Error fetching weather data:", error);
@@ -25,21 +30,19 @@ function fetchWeatherData(lat, lon) {
         });
 }
 
+function displayWeather (data) {
+    const weather = document.getElementById("weatherResult");
+    weather.innerHTML = `<p>${data.current.cloud_cover}<p>`;
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
-
-    //--------------------- API for weather-----------------------------------------
-
-    const form = document.getElementById("myForm");
-
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        getLocation().then(function (data) {
+    
+        getLocation(geoLocation, zipCode).then(function (data) {
             console.log(data);
             fetchWeatherData(data.lat, data.lon);
 
+
         })
-    });
-
     
-
-});
+    })

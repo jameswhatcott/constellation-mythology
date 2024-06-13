@@ -10,10 +10,13 @@ const submitBtn = document.getElementById("submitBtn");
 const geoLocEl = document.getElementById("geoLocEl");
 const zipLocEl = document.getElementById("zipLocEl");
 
-geoLocEl.checked = true;
+if (geoLocEl) {
+  geoLocEl.checked = true;
+}
 
-function getLocation() {
-  if (geoLocEl.checked) { // geolocation option chosen by user
+function getLocation(geoLocation, zipCode) {
+  console.log(geoLocation);
+  if (geoLocation == "true") { // geolocation option chosen by user
     if ("geolocation" in navigator) { // test to see if geolocation is supported by browser
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -28,18 +31,17 @@ function getLocation() {
     };
   };
 
-  if (zipLocEl.checked) { // zip-code option is chosen by the user
-    const searchZip = document.querySelector("#zipInput").value;
-    if (searchZip === "") {
+  if (zipCode) { // zip-code option is chosen by the user
+    if (zipCode === "") {
       alert("Please provide a zip code.");
       return Promise.reject("Zip code not provided.");
     } else {
-      return fetch (`https://maps.googleapis.com/maps/api/geocode/json?address=${searchZip}&key=AIzaSyAkxUKm1ntgvpMBIPdmwi_lx8nib9Bfaiw`) //Matthew's Google Maps API key
+      return fetch (`https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=AIzaSyAkxUKm1ntgvpMBIPdmwi_lx8nib9Bfaiw`) //Matthew's Google Maps API key
         .then ((response) => response.json())
         .then (function (coordinatesObj) {
           lat = coordinatesObj.results[0].geometry.location.lat;
           lon = coordinatesObj.results[0].geometry.location.lng;
-          return { lat, lon };
+          return Promise.resolve({lat, lon});
         }
       );
     }
@@ -56,9 +58,13 @@ async function handleLocation() {
 }
 
 
-submitBtn.addEventListener("click", function(event) {
-  handleLocation();
-});
+if (submitBtn) {
+  submitBtn.addEventListener("click", function(event) {
+    handleLocation();
+  });
+}
+
+
 
 
 // need an event listner that changes radio button to postal code option 

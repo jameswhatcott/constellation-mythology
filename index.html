@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Modal Example</title>
-    <link rel="stylesheet" href="./Assets/css/style.css">
-</head>
-<body>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form>
-                <label></label>
-            <button>X</button>
-            <label>Use my current location</label>
-            <button>X</button>
-            <label>Use This Zip Code:</label>
-            <input type="text" id="cityInput">
-            <button id="openModalBtn" type="submit">Search</button>
-        </form>
+    <head>
+        <meta charset="UTF-8".>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel = "preconnect" href="https://fonts.googleapis.com">
+        <link rel = "preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href = "https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./Assets/css/style.css">
+        <link rel="stylesheet" href="./Assets/css/modal.css">
+        <title>Constellation Weather</title>
+    </head>
+    <body>
+        <div id="splashDiv" class="exo-font">
+            <img src="./Assets/images/cool-space-photo.jpeg" alt="Image of a star cluster" id="splashImg">
+            <div id="splashTitle">
+                <h2 class="exo-font">Constellation Weather</h2>
+                <p class="exo-font">Is tonight a good night to stargaze?</p>
+            </div>
         </div>
-    </div>
-
-    <script src="./Assets/js/script.js"></script>
-</body>
+        <script src="./Assets/js/script.js"></script>
+        <script src="./Assets/js/geolocation.js"></script>
+        <script>
+            setTimeout(function(){
+                window.location.href = './modal.html';
+            }, 5000);
+        </script>
+        </body>
 </html>

@@ -37,7 +37,7 @@ function displayWeather(data) {
 
     function convertISOToNormalTime(isoTime) {
         const date = new Date(isoTime);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
         return date.toLocaleString('en-US', options);
     }
 
@@ -49,9 +49,9 @@ function displayWeather(data) {
 
     if (data.current.visibility < 1000) {
         todayVisibility.innerHTML += ' Foggy ';
-    } else {
+        } else {
         todayVisibility.innerHTML += ' Clear ';
-    }
+        }
 
     const currentHour = currentTime.getHours();
     const startIndex = data.hourly.time.findIndex(time => new Date(time).getHours() === currentHour);
@@ -70,6 +70,7 @@ function displayWeather(data) {
         if (hrTemp && data.hourly.temperature_2m[hourIndex] !== undefined) {
             hrTemp.innerHTML += `${data.hourly.temperature_2m[hourIndex]} ${data.hourly_units.temperature_2m}`;
         }
+
         if (hrCloudCover && data.hourly.cloud_cover[hourIndex] !== undefined) {
             hrCloudCover.innerHTML += `${data.hourly.cloud_cover[hourIndex]}%`;
         }
@@ -77,9 +78,9 @@ function displayWeather(data) {
         if (hrVisibility && data.hourly.visibility[hourIndex] !== undefined) {
             if (data.hourly.visibility[hourIndex] < 1000) {
                 hrVisibility.innerHTML += ' Foggy ';
-            } else {
-                hrVisibility.innerHTML += ' Clear ';
-            }
+                } else {
+                    hrVisibility.innerHTML += ' Clear ';
+                }
         }
     }
 }

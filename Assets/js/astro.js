@@ -1,7 +1,6 @@
 //JavaScript file for the Astronomy API
 const authString = btoa(`applicationId:applicationSecret`);
 
-import {lat,lon} from './geolocation.js';
 //==================================
 document.addEventListener('DOMContentLoaded', function() {
     const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';

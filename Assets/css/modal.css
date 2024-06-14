@@ -6,44 +6,44 @@
 }
 
 .ui-checkboxradio-label {
-    font-family:"Exo";
-    font-weight:7006;
+    font-family: "Exo", sans-serif;
+    font-weight: 700;
 }
 
 .ui-dialog-title {
-    font-family: "Exo", sans-serif;
+    font-family: "Exo", Arial, Helvetica, sans-serif;
 }
 
 #locOptionQuery {
-    margin-top:0;
-    font-family:"Exo", sans-serif;
-    font-weight:600;
-    font-size:1em;
+    margin-top: 0;
+    font-family: "Exo", Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1em;
 }
 
 label {
-    width:265px;
-    border-radius:5px;
+    width: 265px;
+    border-radius: 5px;
 }
 
 #geoLoc label {
-    text-align:left;
+    text-align: left;
 }
 
 #zipLoc {
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 #zipLoc label {
-    text-align:left;
+    text-align: left;
 }
 
 #zipInput {
-    font-family:"Exo", sans-serif;
-    font-size:1em;
-    position:relative;
-    width:90px;
-    left:10px;
+    font-family: "Exo", Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    position: relative;
+    width: 90px;
+    left: 10px;
 }
 
 #submitBtn {

@@ -3,9 +3,10 @@
   // In the code below, I've just made up names and IDs for the radio buttons and the input box.
   // locatorOpt is my name for both radio buttons (so that only one can be picked at a time)
   // geoLocEl is my id for the geolocation option.
-  
+
 let lat = ""; // these need to be global variables to pass out of the .then statements
 let lon = "";
+
 const submitBtn = document.getElementById("submitBtn");
 const geoLocEl = document.getElementById("geoLocEl");
 const zipLocEl = document.getElementById("zipLocEl");

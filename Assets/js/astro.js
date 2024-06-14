@@ -19,11 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            console.log('API response', data);
             processStarChartData(data);
         })
         .catch(error => {
-            console.error('Error getting data')
+            console.error('Error getting data', error)
         });
     function processStarChartData(data) {
         const skyImage = document.getElementById('skyImage');
@@ -32,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
             skyImage.setAttribute('alt', 'Sky Image');
         } else {
             skyImage.textContent = 'No image';
+        }
+    }
+    function displayStarChart(data) {
+        const constellationsList = document.getElementById('constellationsList');
+        constellationsList.innerHTML = '';
+
+        if (data.constellations && data.constellations.length > 0) {
+            data.constellations.forEach(constellation => {
+                const constellationItem = document.createElement('li');
+                constellationsItem.textContent = constellation.name;
+                constellationList.appendChild(constellationItem);
+            });
+        } else {
+            constellationList.textContent = 'No constellations'
         }
     }
 });

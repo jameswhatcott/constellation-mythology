@@ -7,8 +7,6 @@
 let lat = ""; // these need to be global variables to pass out of the .then statements
 let lon = "";
 
-export {lat, lon}; //exports lat and lon to astro.js
-
 const submitBtn = document.getElementById("submitBtn");
 const geoLocEl = document.getElementById("geoLocEl");
 const zipLocEl = document.getElementById("zipLocEl");

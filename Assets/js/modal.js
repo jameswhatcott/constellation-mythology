@@ -23,9 +23,16 @@ const zipLocEl = document.getElementById("zipLocEl");
 const zipInputEl = document.getElementById("zipInput");
 
 document.addEventListener('DOMContentLoaded', function() {
+  // fixes a limitation in jQuery UI dialog boxes wherein they do not recenter if the viewport size changes
   $(window).resize(function() {
     $("#locOptionsSet").dialog("option", "position", {my: "center", at: "center", of: window});
   });
+
+  // selects "Postal Code" radio button if user changes the zip code input box
+  zipInput.addEventListener("input", (function() {
+    zipLocEl.click() // I used this instead of changing the state to true because changing the state does not invoke the jQuery UI functions to visually activate the radio button
+  }));
+  
   const form = document.getElementById("myForm");
   if (form) {
     form.addEventListener("submit", (event) => {

@@ -20,14 +20,24 @@ document.addEventListener("onload", getLocation());
 
 const geoLocEl = document.getElementById("geoLocEl");
 const zipLocEl = document.getElementById("zipLocEl");
+const zipInputEl = document.getElementById("zipInput");
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+
   const form = document.getElementById("myForm");
   if (form) {
-  form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const geo = geoLocEl.checked; 
+
+      const geo = geoLocEl.defaultChecked; 
       const searchZip = document.querySelector("#zipInput").value;
-      window.location.href = `results.html?geolocation=${geo}&zipcode=${searchZip}`
-})}})
+      if (zipLocEl.checked) {
+        if (searchZip === "" || searchZip.length !== 5) {
+          alert ("Please provide a zip code.");
+          return Promise.reject("Zip code not provided.");
+        }
+      }
+    window.location.href = `results.html?geolocation=${geo}&zipcode=${searchZip}`
+    })
+  }
+})

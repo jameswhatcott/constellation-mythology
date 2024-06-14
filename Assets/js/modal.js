@@ -6,7 +6,6 @@ function getLocation() {
       alert("Your brower does not support geolocation. Try a different browser.");
       return;
     }
-  // } else { // zip code option chosen by user
   }
 
 function showPosition(position) {
@@ -22,7 +21,6 @@ document.addEventListener("onload", getLocation());
 const geoLocEl = document.getElementById("geoLocEl");
 const zipLocEl = document.getElementById("zipLocEl");
 
-
 document.addEventListener('DOMContentLoaded', function() {
     
   const form = document.getElementById("myForm");
@@ -32,8 +30,4 @@ document.addEventListener('DOMContentLoaded', function() {
       const geo = geoLocEl.checked; 
       const searchZip = document.querySelector("#zipInput").value;
       window.location.href = `results.html?geolocation=${geo}&zipcode=${searchZip}`
-      
-
-    
-  
-  })}})
+})}})

@@ -37,7 +37,7 @@ function displayWeather(data) {
 
     function convertISOToNormalTime(isoTime) {
         const date = new Date(isoTime);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
+        const options = {hour: 'numeric', minute: 'numeric', timeZoneName: 'short' };
         return date.toLocaleString('en-US', options);
     }
 
@@ -64,7 +64,7 @@ function displayWeather(data) {
         const hrVisibility = document.querySelector(`#hrWeather\\[${i + 1}\\] .visibility`);
 
         if (hr && data.hourly.time[hourIndex] !== undefined) {
-            hr.innerHTML = `${convertISOToNormalTime(data.hourly.time[hourIndex]).substring(26)}`;
+            hr.innerHTML = `${convertISOToNormalTime(data.hourly.time[hourIndex])}`;
         }
 
         if (hrTemp && data.hourly.temperature_2m[hourIndex] !== undefined) {

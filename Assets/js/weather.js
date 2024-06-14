@@ -5,7 +5,7 @@ let geoLocation = params.get("geolocation");
 let zipCode = params.get("zipcode");
 
 function fetchWeatherData(lat, lon) {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,cloud_cover&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,cloud_cover,visibility&temperature_unit=fahrenheit&timezone=auto&forecast_days=1`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,cloud_cover&hourly=temperature_2m,apparent_temperature,precipitation_probability,precipitation,cloud_cover,visibility&temperature_unit=fahrenheit&timezone=auto&forecast_days=2`;
 
     fetch(url)
         .then(response => {
@@ -56,7 +56,7 @@ function displayWeather(data) {
     const currentHour = currentTime.getHours();
     const startIndex = data.hourly.time.findIndex(time => new Date(time).getHours() === currentHour);
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
         const hourIndex = startIndex + i;
         const hr = document.querySelector(`#hrWeather\\[${i + 1}\\] .hr`);
         const hrTemp = document.querySelector(`#hrWeather\\[${i + 1}\\] .temp`);

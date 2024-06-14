@@ -23,7 +23,9 @@ const zipLocEl = document.getElementById("zipLocEl");
 const zipInputEl = document.getElementById("zipInput");
 
 document.addEventListener('DOMContentLoaded', function() {
-
+  $(window).resize(function() {
+    $("#locOptionsSet").dialog("option", "position", {my: "center", at: "center", of: window});
+  });
   const form = document.getElementById("myForm");
   if (form) {
     form.addEventListener("submit", (event) => {

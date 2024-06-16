@@ -15,28 +15,29 @@
             $(function() {
                 $("#locOptionsSet").dialog({
                     autoOpen: true,
-                    modal: true
+                    modal: true,
+                    closeOnEscape: false
                 });
             });
         </script>
     </head>
     
     <body>
-        <div id = "locOptionsSet" title="Location Method">
-            <h2 id="locOptionQuery">How Should I Find Your Map?</h2>
-            <form id="myForm">
-            <div id="geoLoc">
-                <label for = "geoLocEl">Geolocation
+        <div id = "locOptionsSet" title = "Location Method">
+            <h2 id = "locOptionQuery" class = "exo-font">How Should I Find Your Map?</h2>
+            <form id = "myForm">
+            <div id = "geoLoc">
+                <label for = "geoLocEl" class = "exo-font">Geolocation
                     <input name = "locatorOpt" type = "radio" id = "geoLocEl" checked>
                 </label>
             </div>
-            <div id="zipLoc">
-                <label for = "zipLocEl">Postal Code
+            <div id = "zipLoc">
+                <label for = "zipLocEl" class="exo-font">Postal Code
                     <input name = "locatorOpt" type = "radio" id = "zipLocEl">
-                    <input id = "zipInput" placeholder = "Zip code">
+                    <input id = "zipInput" placeholder = "Zip code" type = "number">
                 </label>
             </div>
-            <button type = "submit" id = "submitBtn" style = "width:70px; border-radius:5px; text-align:center;">Go!</button>
+            <button type = "submit" id = "submitBtn">Go!</button>
             </form>
         </div>
         <script>

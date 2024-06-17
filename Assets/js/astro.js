@@ -3,58 +3,6 @@ const apiKey = '7981e824-0c2d-4e2b-bb9b-71c6acd7b32c';
 const apiSecret = '5a0bba4bfb658609c5f6bbe23536169e435f36ca3589bd2e8bc5de8571c90e4edaa38067801da07293d2b0771ae0a5e3c6a72fb98384cec4d942e4ea963c183d8eb63f6f6ee0a21b14efb2246f4e36eea247ea78f50933e0674eea32131dd71acb60185f6f19105632da091e957c6e85';
 const authString = btoa(`${apiKey}:${apiSecret}`);
 
-//----------------------------------------------------
-function degreesToRadians(degrees) {
-    return degrees * Math.PI / 180;
-}
-
-function radiansToDegrees(radians) {
-    return radians * 180 / Math.PI;
-}
-
-function getJulianDate(date) {
-    return date / 86400000 + 2440587.5;
-}
-
-function getGMST(date) {
-    const julianDate = getJulianDate(date);
-    const d = julianDate - 2451545.0;
-    const GMST = 280.46061837 + 360.98564736629 * d;
-    return GMST % 360;
-}
-
-function getLocalSiderealTime(longitude, date) {
-    const gmst = getGMST(date);
-    return (gmst + longitude) % 360;
-}
-
-function convertLatLonToRADec(lat, lon, date) {
-    const observerLat = degreesToRadians(lat);
-    const observerLon = degreesToRadians(lon);
-
-    // Convert to Local Sidereal Time (LST)
-    const dateTime = new Date(date);
-    const lst = degreesToRadians(getLocalSiderealTime(lon, dateTime));
-
-    // Compute declination (same as latitude for simplicity)
-    const declination = observerLat;
-
-    // Compute right ascension
-    const hourAngle = lst - observerLon;
-    const rightAscension = (hourAngle + Math.PI * 2) % (Math.PI * 2);
-
-    return {
-        rightAscension: radiansToDegrees(rightAscension), // In degrees
-        declination: radiansToDegrees(declination) // In degrees
-    };
-}
-
-
-
-
-
-
-//-----------------------------------------------------
 
     
 
@@ -62,11 +10,6 @@ function convertLatLonToRADec(lat, lon, date) {
 function getStarChart(lat, lon) {
     const url = `https://api.astronomyapi.com/api/v2/studio/star-chart`;
     const currentDate = new Date().toISOString().split('T')[0];
-    const { rightAscension, declination } = convertLatLonToRADec(lat, lon, new Date());
-
-    const ra = rightAscension;
-    const dec = declination;
-
 
     fetch(url, {
         method: 'POST',

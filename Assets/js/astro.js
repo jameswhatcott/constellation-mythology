@@ -4,35 +4,55 @@ const apiSecret = '5a0bba4bfb658609c5f6bbe23536169e435f36ca3589bd2e8bc5de8571c90
 const authString = btoa(`${apiKey}:${apiSecret}`);
 
 // Function to fetch star chart
-function getStarChart(lat, lon, globalDate) {
-    const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
+function getStarChart(lat, lon) {
+    const url = `https://api.astronomyapi.com/api/v2/studio/star-chart`;
 
     fetch(url, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Authorization': `Basic ${authString}`,
-            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'observer': {
-                'latitude': `${lat}`,
-                'longitude': `${lon}`,
-                'date': `${globalDate}`
+            "observer": {
+                "latitude": lat,
+                "longitude": lon,
+                "date": "2019-12-20"
             },
-            'view': {
-                'type': 'area',
-                'parameters': {
-                    'position': {
-                        'equatorial': {
-                            'rightAscension': 0,
-                            'declination': 0
+            "view": {
+                "type": "area",
+                "parameters": {
+                    "position": {
+                        "equatorial": {
+                            "rightAscension": 14.83,
+                            "declination": -15.23
                         }
                     },
-                    'zoom': 3
+                    "zoom": 3 //optional
                 }
             }
-        })
-    })
+        }
+            //{
+            // 'observer': {
+            //     'latitude': `33.775867`,
+            //     'longitude': `-84.39733`,
+            //     'date': `2024-06-17`
+            // },
+            // 'view': {
+            //     'type': 'area',
+            //     'parameters': {
+            //         'position': {
+            //             'equatorial': {
+            //                 'rightAscension': 14.83,
+            //                 'declination': -15.23
+            //             }
+            //         },
+            //         'zoom': 3
+            //     }
+            //}
+        //}
+        )
+   }
+   )
     .then(response => {
         if (!response.ok) {
             throw new Error('Network Error');
@@ -41,7 +61,6 @@ function getStarChart(lat, lon, globalDate) {
     })
     .then(data => {
         console.log('API response', data);
-        displayStarChart(data);
     })
     .catch(error => {
         console.error('Error getting data', error);

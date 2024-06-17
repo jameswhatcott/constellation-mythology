@@ -4,7 +4,10 @@ const apiSecret = '5a0bba4bfb658609c5f6bbe23536169e435f36ca3589bd2e8bc5de8571c90
 const authString = btoa(`${apiKey}:${apiSecret}`);
 //==================================
 document.addEventListener('DOMContentLoaded', function() {
+    
     const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
+
+
 
     //Fetches API
     fetch(url, {
@@ -25,6 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error getting data')
         });
+
+
+
+
     function processStarChartData(data) {
         const skyImage = document.getElementById('skyImage');
         if (data.image_url) {

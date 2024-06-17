@@ -13,20 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Authorization': `Basic ${authString}`
             }
         })
-            .then(response => {
-                if(!response.ok) {
-                    throw new Error('Network Error');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('API response', data);
-                displayStarChart(data);
-                displayConstellations(data);
-            })
-            .catch(error => {
-                console.error('Error getting data', error)
-            });
+        .then(response => {
+            if(!response.ok) {
+                throw new Error('Network Error');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('API response', data);
+            displayStarChart(data);
+            displayConstellations(data);
+        })
+        .catch(error => {
+            console.error('Error getting data', error)
+        });
 
         function displayStarChart(data) {
             const skyImage = document.getElementById('skyImage');
@@ -37,23 +37,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 skyImage.textContent = 'No image';
             }
         }
-        
-        }
+    }
     
-        function displayConstellations(data) {
-            const constellationsList = document.getElementById('constellationsList');
-            constellationsList.innerHTML = '';
-    
-            if (data.data && data.data.constellations) {
-                data.data.constellations.forEach(constellation => {
-                    const constellationItem = document.createElement('li');
-                    constellationsItem.textContent = constellation.name;
-                    constellationList.appendChild(constellationItem);
-                });
-            } else {
-                constellationList.textContent = 'No constellations'
-            }
+    function displayConstellations(data) {
+        const constellationsList = document.getElementById('constellationsList');
+        constellationsList.innerHTML = '';
+
+        if (data.data && data.data.constellations) {
+            data.data.constellations.forEach(constellation => {
+                const constellationItem = document.createElement('li');
+                constellationsItem.textContent = constellation.name;
+                constellationList.appendChild(constellationItem);
+            });
+        } else {
+            constellationList.textContent = 'No constellations'
         }
+    }
     
     getStarChart();
 });

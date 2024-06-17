@@ -1,5 +1,4 @@
-# Project Title
-Constellation Weather
+# Constellation Weather
 
 ## User Story
 
@@ -28,12 +27,20 @@ Constellation Weather requires no installation. However, a user will be prompted
 
 Constellation Weather is simple to use. Upon opening the app, the user is presented with a splash screen followed by a modal dialog box asking how the app should determine the user's location. Once the "Go!" button on modal dialog box is clicked, the splash page closes, and a results page appears showing the sky and constellations visible at the user's location and providing weather information that the user can consider when determining whether or not tonight will be a good night for skywatching. If the user wants to return to input another location, he clicks on the "Again!" button to return to the modal dialog box.
 
-A screen shot of a results page is below. To launch the app, click [here](https://..............).
+A screen shot of a results page is below. To launch the app, click [here](https://jameswhatcott.github.io/constellation-weather-app/).
+
+![Constellation Weather](./assets/images/constellation-weather.jpg).
+
 
 ## Potential New and Improved Features
 
-1. Internationalize the app to accept more than U.S. postal codes.
-2. Allow users to choose see the sky map and weather on a date of her choosing. 
+1. Create a history of previous searches.
+2. Insert weather animations based on conditions.
+3. Create animations for zooming into space to see what space would look like the deeper you travel.
+4. Create proper scrolling transitions.
+5. Internationalize the app to accept more than U.S. postal codes.
+6. Allow users to choose see the sky map and weather on a date of her choosing.
+
 
 ## Version History
 
@@ -43,8 +50,3 @@ A screen shot of a results page is below. To launch the app, click [here](https:
 ### Credits and Acknowledgments
 
 Caleb Francis, Brian Nyamohanga, James Whatcott, and Matthew Williams developed version 0.1 of Constellation Weather. Rene Trevino and Slavic Andreev provided significant support.
-
-## License
-
-Constellation Weather is licensed under the MIT License. See the LICENSE.md file for details.
-

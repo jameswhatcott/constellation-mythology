@@ -3,9 +3,70 @@ const apiKey = '7981e824-0c2d-4e2b-bb9b-71c6acd7b32c';
 const apiSecret = '5a0bba4bfb658609c5f6bbe23536169e435f36ca3589bd2e8bc5de8571c90e4edaa38067801da07293d2b0771ae0a5e3c6a72fb98384cec4d942e4ea963c183d8eb63f6f6ee0a21b14efb2246f4e36eea247ea78f50933e0674eea32131dd71acb60185f6f19105632da091e957c6e85';
 const authString = btoa(`${apiKey}:${apiSecret}`);
 
+//----------------------------------------------------
+function degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+function radiansToDegrees(radians) {
+    return radians * 180 / Math.PI;
+}
+
+function getJulianDate(date) {
+    return date / 86400000 + 2440587.5;
+}
+
+function getGMST(date) {
+    const julianDate = getJulianDate(date);
+    const d = julianDate - 2451545.0;
+    const GMST = 280.46061837 + 360.98564736629 * d;
+    return GMST % 360;
+}
+
+function getLocalSiderealTime(longitude, date) {
+    const gmst = getGMST(date);
+    return (gmst + longitude) % 360;
+}
+
+function convertLatLonToRADec(lat, lon, date) {
+    const observerLat = degreesToRadians(lat);
+    const observerLon = degreesToRadians(lon);
+
+    // Convert to Local Sidereal Time (LST)
+    const dateTime = new Date(date);
+    const lst = degreesToRadians(getLocalSiderealTime(lon, dateTime));
+
+    // Compute declination (same as latitude for simplicity)
+    const declination = observerLat;
+
+    // Compute right ascension
+    const hourAngle = lst - observerLon;
+    const rightAscension = (hourAngle + Math.PI * 2) % (Math.PI * 2);
+
+    return {
+        rightAscension: radiansToDegrees(rightAscension), // In degrees
+        declination: radiansToDegrees(declination) // In degrees
+    };
+}
+
+
+
+
+
+
+//-----------------------------------------------------
+
+    
+
 // Function to fetch star chart
 function getStarChart(lat, lon) {
     const url = `https://api.astronomyapi.com/api/v2/studio/star-chart`;
+    const currentDate = new Date().toISOString().split('T')[0];
+    const { rightAscension, declination } = convertLatLonToRADec(lat, lon, new Date());
+
+    const ra = rightAscension;
+    const dec = declination;
+
 
     fetch(url, {
         method: 'POST',
@@ -16,40 +77,21 @@ function getStarChart(lat, lon) {
             "observer": {
                 "latitude": lat,
                 "longitude": lon,
-                "date": "2019-12-20"
+                "date": currentDate,
             },
             "view": {
                 "type": "area",
                 "parameters": {
                     "position": {
                         "equatorial": {
-                            "rightAscension": 14.83,
-                            "declination": -15.23
+                            "rightAscension": 0,
+                            "declination": 0,
                         }
                     },
                     "zoom": 3 //optional
                 }
             }
         }
-            //{
-            // 'observer': {
-            //     'latitude': `33.775867`,
-            //     'longitude': `-84.39733`,
-            //     'date': `2024-06-17`
-            // },
-            // 'view': {
-            //     'type': 'area',
-            //     'parameters': {
-            //         'position': {
-            //             'equatorial': {
-            //                 'rightAscension': 14.83,
-            //                 'declination': -15.23
-            //             }
-            //         },
-            //         'zoom': 3
-            //     }
-            //}
-        //}
         )
    }
    )
@@ -61,6 +103,10 @@ function getStarChart(lat, lon) {
     })
     .then(data => {
         console.log('API response', data);
+
+        const skyImageUrl = data.data.imageUrl;
+
+        document.getElementById('skyImage').src = skyImageUrl;
     })
     .catch(error => {
         console.error('Error getting data', error);
@@ -68,19 +114,19 @@ function getStarChart(lat, lon) {
 }
 
 // Function to display star chart
-function displayStarChart(data) {
-    const skyImage = document.getElementById('skyImage');
-    if (data.data && data.data.imageUrl) {
-        skyImage.setAttribute('src', data.data.imageUrl);
-        skyImage.setAttribute('alt', 'Sky Image');
-    } else {
-        skyImage.textContent = 'No image available';
-    }
-}
+// function displayStarChart(data) {
+//     const skyImage = document.getElementById('skyImage');
+//     if (data.data && data.data.imageUrl) {
+//         skyImage.setAttribute('src', data.data.imageUrl);
+//         skyImage.setAttribute('alt', 'Sky Image');
+//     } else {
+//         skyImage.textContent = 'No image available';
+//     }
+// }
 
 // Fetch lat, lon, and date from localStorage and call getStarChart
 document.addEventListener('DOMContentLoaded', function() {
     getLocation(geoLocation, zipCode).then(function (data) {
-        getStarChart(data.lat, data.lon);
+        getStarChart(lat, lon);
 })
 });

@@ -47,15 +47,20 @@ function getLocation(geoLocation, zipCode) {
 async function handleLocation() {
   try {
     const position = await getLocation();
+    console.log(lat + ", " + lon);
+    // Save lat and lon to localStorage for use on results page
+    localStorage.setItem('latitude', lat);
+    localStorage.setItem('longitude', lon);
+    // Redirect to results page
+    window.location.href = './results.html';
   } catch (error) {
     console.error(error);
   }
-  console.log(lat + ", " + lon)
 }
-
 
 if (submitBtn) {
   submitBtn.addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent form submission
     handleLocation();
   });
 }

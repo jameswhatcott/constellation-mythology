@@ -29,7 +29,7 @@ Constellation Weather is simple to use. Upon opening the app, the user is presen
 
 A screen shot of a results page is below. To launch the app, click [here](https://jameswhatcott.github.io/constellation-weather-app/).
 
-![Constellation Weather](./assets/images/constellation-weather.jpg).
+![Constellation Weather](./Assets/images/constellation-weather.jpg).
 
 
 ## Potential New and Improved Features

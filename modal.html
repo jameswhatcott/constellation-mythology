@@ -1,6 +1,5 @@
 <!doctype html> 
 <html lang="en"> 
-  
     <head> 
         <meta charset="utf-8">
         <title>Constellation Weather</title>
@@ -12,28 +11,26 @@
         <link rel = "stylesheet" href="./assets/css/modal.css">
         <script src = "https://code.jquery.com/jquery-1.12.4.js"></script> 
         <script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
- 
     </head>
-        <body  class="min-h-screen font-exo bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white text-base text-5xl">
-            <header class="bg-[url('./Assets/images/space-photo.jpg')] text-white sticky top-0 z-10"> 
-                <section class=" max-w-6xl mx-auto p-4 justify-between items-center "> 
-                    <h1 class="text-5xl font-bold">
-                        🌃In Today's SKY
-                    </h1>
-                </section>
-             </header>
-            <script>
-                $(function() {
-                    $("#locOptionsSet").dialog({
-                        autoOpen: true,
-                        modal: true,
-                        closeOnEscape: false
-                    });
+
+    <body class="min-h-screen font-exo bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-white text-base text-5xl">
+        <header class="bg-[url('./Assets/images/space-photo.jpg')] text-white sticky top-0 z-10"> 
+            <section class=" max-w-6xl mx-auto p-4 justify-between items-center "> 
+                <h1 class="text-5xl font-bold">
+                    🌃 In Today&rsquo;s SKY
+                </h1>
+            </section>
+        </header>
+        <script>
+            $(function() {
+                $("#locOptionsSet").dialog({
+                    autoOpen: true,
+                    modal: true,
+                    closeOnEscape: false
                 });
-            </script>
-        </head>
-    <main class="min-h-screen flex flex-col">
-        <body>
+            });
+        </script>
+        <main class="min-h-screen flex flex-col">
             <div id = "locOptionsSet" title = "Location Method">
                 <h2 id = "locOptionQuery" class = "exo-font">How Should I Find Your Map?</h2>
                 <form id = "myForm">
@@ -62,14 +59,14 @@
                 })
             </script>
             <script src="./Assets/js/modal.js"></script>
-        </body>
-    </main>
+        </main>
+    </body>
+
     <footer class="bg-[url('./Assets/images/space-photo.jpg')] text-white m-auto top-0 z-10"> 
         <section class=" mx-auto p-4 justify-between "> 
             <h1 class="text-3xl font-bold">
-                Made with passion by the constellation team 🌃 (BRIAN, JAMES, CALEB,MATTHEW ) 🌃
+                Made with passion by the constellation team 🌃 (BRIAN, JAMES, CALEB, MATTHEW) 🌃
             </h1>
         </section>
-       
     </footer>
 </html>

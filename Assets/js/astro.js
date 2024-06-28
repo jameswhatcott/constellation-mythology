@@ -8,13 +8,15 @@ const authString = btoa(`${apiKey}:${apiSecret}`);
 
 // Function to fetch star chart
 function getStarChart(lat, lon) {
-    const url = `https://api.astronomyapi.com/api/v2/studio/star-chart`;
+    const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
     const currentDate = new Date().toISOString().split('T')[0];
 
     fetch(url, {
         method: 'POST',
+        mode: 'cors',
         headers: {
-            'Authorization': `Basic ${authString}`,
+            "Authorization": `Basic ${authString}`,
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             "observer": {
@@ -53,6 +55,9 @@ function getStarChart(lat, lon) {
     })
     .catch(error => {
         console.error('Error getting data', error);
+        if (error.response) {
+            console.log('Response:', error.response);
+        }
     });
 }
 

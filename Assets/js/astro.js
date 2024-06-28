@@ -2,85 +2,74 @@
 const apiKey = '7981e824-0c2d-4e2b-bb9b-71c6acd7b32c';
 const apiSecret = '5a0bba4bfb658609c5f6bbe23536169e435f36ca3589bd2e8bc5de8571c90e4edaa38067801da07293d2b0771ae0a5e3c6a72fb98384cec4d942e4ea963c183d8eb63f6f6ee0a21b14efb2246f4e36eea247ea78f50933e0674eea32131dd71acb60185f6f19105632da091e957c6e85';
 const authString = btoa(`${apiKey}:${apiSecret}`);
-//==================================
-document.addEventListener('DOMContentLoaded', function() {
-<<<<<<< HEAD
+
+
     
-    const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
 
+// Function to fetch star chart
+function getStarChart(lat, lon) {
+    const url = `https://api.astronomyapi.com/api/v2/studio/star-chart`;
+    const currentDate = new Date().toISOString().split('T')[0];
 
-
-    //Fetches API
     fetch(url, {
+        method: 'POST',
         headers: {
-            'Authorization': `Basic ${authString}`
+            'Authorization': `Basic ${authString}`,
+        },
+        body: JSON.stringify({
+            "observer": {
+                "latitude": lat,
+                "longitude": lon,
+                "date": currentDate,
+            },
+            "view": {
+                "type": "area",
+                "parameters": {
+                    "position": {
+                        "equatorial": {
+                            "rightAscension": 0,
+                            "declination": 0,
+                        }
+                    },
+                    "zoom": 3 //optional
+                }
+            }
         }
+        )
+   }
+   )
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network Error');
+        }
+        return response.json();
     })
-=======
-    function getStarChart() {
-        const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
+    .then(data => {
+        console.log('API response', data);
 
-        //Fetches API
-        fetch(url, {
-            headers: {
-                'Authorization': `Basic ${authString}`
-            }
-        })
->>>>>>> 18897e0f7428c9a5a097ff19b64fe0826d9402ac
-        .then(response => {
-            if(!response.ok) {
-                throw new Error('Network Error');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('API response', data);
-            displayStarChart(data);
-            displayConstellations(data);
-        })
-        .catch(error => {
-            console.error('Error getting data', error)
-        });
+        const skyImageUrl = data.data.imageUrl;
 
-<<<<<<< HEAD
+        document.getElementById('skyImage').src = skyImageUrl;
+    })
+    .catch(error => {
+        console.error('Error getting data', error);
+    });
+}
 
+// Function to display star chart
+// function displayStarChart(data) {
+//     const skyImage = document.getElementById('skyImage');
+//     if (data.data && data.data.imageUrl) {
+//         skyImage.setAttribute('src', data.data.imageUrl);
+//         skyImage.setAttribute('alt', 'Sky Image');
+//     } else {
+//         skyImage.textContent = 'No image available';
+//     }
+// }
 
-
-    function processStarChartData(data) {
-        const skyImage = document.getElementById('skyImage');
-        if (data.image_url) {
-            skyImage.setAttribute('src', data.image_url);
-            skyImage.setAttribute('alt', 'Sky Image');
-        } else {
-            skyImage.textContent = 'No image';
-=======
-        function displayStarChart(data) {
-            const skyImage = document.getElementById('skyImage');
-            if (data.data && data.data.imageUrl) {
-                skyImage.setAttribute('src', data.image.url);
-                skyImage.setAttribute('alt', 'Sky Image');
-            } else {
-                skyImage.textContent = 'No image';
-            }
->>>>>>> 18897e0f7428c9a5a097ff19b64fe0826d9402ac
-        }
-    }
-    
-    function displayConstellations(data) {
-        const constellationsList = document.getElementById('constellationsList');
-        constellationsList.innerHTML = '';
-
-        if (data.data && data.data.constellations) {
-            data.data.constellations.forEach(constellation => {
-                const constellationItem = document.createElement('li');
-                constellationsItem.textContent = constellation.name;
-                constellationList.appendChild(constellationItem);
-            });
-        } else {
-            constellationList.textContent = 'No constellations'
-        }
-    }
-    
-    getStarChart();
+// Fetch lat, lon, and date from localStorage and call getStarChart
+document.addEventListener('DOMContentLoaded', function() {
+    getLocation(geoLocation, zipCode).then(function (data) {
+        getStarChart(lat, lon);
+})
 });
-//==================================

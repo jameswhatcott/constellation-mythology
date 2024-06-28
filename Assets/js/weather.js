@@ -16,6 +16,7 @@ function fetchWeatherData(lat, lon) {
         })
         .then(data => {
             console.log(data);  // Log data to console
+            globalDate = new Date().toISOString(); // or any date format you prefer
             displayWeather(data);
         })
         .catch(error => {

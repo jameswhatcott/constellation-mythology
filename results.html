@@ -23,9 +23,13 @@
         </section>
      </header>
     <main class="min-h-screen flex flex-col ">
-        <div class=" box-border h-fit w-fit mx-auto">
-            <img id="skyImage" alt="Sky Image">
+        <div class="box-border h-fit w-fit mx-auto relative">
+            <div id="loading" class="absolute inset-0 flex items-center justify-center">
+                <span>Loading...</span>
+            </div>
+            <img id="skyImage" alt="Sky Image" class="hidden">
         </div>
+        
         <header class=" box-border h-20 w-full ">
             <section class=" p-4 justify-between items-center ">
                <h2 class="text-3xl font-bold text-red-700 text-center">

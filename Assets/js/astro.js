@@ -6,10 +6,14 @@ const authString = btoa(`${apiKey}:${apiSecret}`);
 
     
 
-// Function to fetch star chart
 function getStarChart(lat, lon) {
     const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
     const currentDate = new Date().toISOString().split('T')[0];
+    const skyImage = document.getElementById('skyImage');
+    const loading = document.getElementById('loading');
+
+    loading.style.display = 'flex';
+    skyImage.classList.add('hidden');
 
     fetch(url, {
         method: 'POST',
@@ -33,13 +37,11 @@ function getStarChart(lat, lon) {
                             "declination": 0,
                         }
                     },
-                    "zoom": 3 //optional
+                    "zoom": 3
                 }
             }
-        }
-        )
-   }
-   )
+        })
+    })
     .then(response => {
         if (!response.ok) {
             throw new Error('Network Error');
@@ -48,33 +50,23 @@ function getStarChart(lat, lon) {
     })
     .then(data => {
         console.log('API response', data);
-
         const skyImageUrl = data.data.imageUrl;
 
-        document.getElementById('skyImage').src = skyImageUrl;
+        skyImage.src = skyImageUrl;
+        skyImage.onload = () => {
+            loading.style.display = 'none';
+            skyImage.classList.remove('hidden');
+        };
     })
     .catch(error => {
         console.error('Error getting data', error);
-        if (error.response) {
-            console.log('Response:', error.response);
-        }
+        loading.textContent = 'Error loading image.';
     });
 }
 
-// Function to display star chart
-// function displayStarChart(data) {
-//     const skyImage = document.getElementById('skyImage');
-//     if (data.data && data.data.imageUrl) {
-//         skyImage.setAttribute('src', data.data.imageUrl);
-//         skyImage.setAttribute('alt', 'Sky Image');
-//     } else {
-//         skyImage.textContent = 'No image available';
-//     }
-// }
-
-// Fetch lat, lon, and date from localStorage and call getStarChart
 document.addEventListener('DOMContentLoaded', function() {
-    getLocation(geoLocation, zipCode).then(function (data) {
+    getLocation(geoLocation, zipCode).then(function(data) {
         getStarChart(lat, lon);
-})
+    });
 });
+
